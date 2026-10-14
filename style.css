@@ -269,8 +269,8 @@
    ========================================================================== */
 .fx-viewhead {
   margin: 0 0 10px !important; padding: 0 !important;
-  font-family: var(--fx-serif); font-size: 52px; font-weight: 500; line-height: 1.02; letter-spacing: -.025em;
-  color: var(--fx-ink);
+  font-family: var(--fx-serif) !important; font-size: 52px !important; font-weight: 500 !important; line-height: 1.02 !important; letter-spacing: -.025em;
+  color: var(--fx-ink) !important;
 }
 .fx-viewhead a { color: inherit; }
 .fx-actions { display: flex !important; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin: 12px 0 !important; font-size: 12px; color: var(--fx-muted); }
@@ -1184,12 +1184,13 @@ fieldset.fx-ghero__grid { display: flex !important; flex-wrap: wrap; align-items
 .fx-field--actions .fx-field__control { display: flex; flex-wrap: wrap; gap: 10px; }
 .fx-field__control img { max-width: 180px; height: auto; margin: 4px 0; border-radius: 14px; }
 
-.fx-fpanel :is(input:not([type="radio"], [type="checkbox"], [type="file"], [type="submit"], [type="button"], [type="reset"], [type="hidden"]), textarea, select) {
+.fx-fpanel :is(input:not([type="radio"], [type="checkbox"], [type="file"], [type="submit"], [type="button"], [type="reset"], [type="hidden"]), select) {
   width: 100%; max-width: 460px; min-width: 0; height: 42px; margin: 0; padding: 0 14px;
   font: 400 13px var(--fx-font); color: var(--fx-ink); background: #fff; border: 1px solid var(--fx-line); border-radius: 12px; box-shadow: none;
   transition: border-color .2s, box-shadow .2s;
 }
-.fx-fpanel textarea { height: auto; min-height: 150px; max-width: 100%; padding: 12px 14px; line-height: 1.6; resize: vertical; }
+.fx-fpanel textarea { width: 100%; max-width: 100%; min-width: 0; min-height: 150px; margin: 0; padding: 12px 14px; font: 400 13px/1.6 var(--fx-font); color: var(--fx-ink); background: #fff; border: 1px solid var(--fx-line); border-radius: 12px; box-shadow: none; resize: vertical; }
+.fx-fpanel fieldset.submit-buttons { flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
 .fx-fpanel :is(input, textarea, select):focus { outline: 0; border-color: var(--fx-accent); box-shadow: 0 0 0 3px var(--fx-accent-soft); }
 .fx-fpanel input[disabled] { opacity: .6; }
 .fx-fpanel input[type="file"] { width: auto; font: 400 12px var(--fx-font); color: var(--fx-muted); }
@@ -1250,8 +1251,9 @@ fieldset.fx-ghero__grid { display: flex !important; flex-wrap: wrap; align-items
 
 /* ---- profile view (advanced): main + sticky identity card ---- */
 .fx-pview { display: flex; align-items: flex-start; gap: 28px; margin-top: 8px; }
+#profile-advanced-left, #profile-advanced-layout { float: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; }
 .fx-pview__main { flex: 1 1 0; min-width: 0; float: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; }
-.fx-pview__side { flex: 0 0 300px; width: 300px !important; float: none !important; margin: 70px 0 0 !important; padding: 0 !important; position: sticky; top: calc(var(--fx-nav-top, 0px) + 70px); }
+.fx-pview__side { flex: 0 0 300px; width: 300px !important; float: none !important; margin: 0 !important; padding: 0 !important; position: sticky; top: calc(var(--fx-nav-top, 0px) + 70px); }
 .fx-pview .clear, .fx-pview .clearfix, .fx-pview .separator, .fx-pview hr { display: none !important; }
 .fx-pview__pages { flex: 1 1 100%; float: none !important; margin: 0 !important; font-size: 12px; color: var(--fx-muted); }
 
@@ -1355,13 +1357,13 @@ fieldset.fx-ghero__grid { display: flex !important; flex-wrap: wrap; align-items
 .fx-table td:last-child { border-right: 1px solid rgba(176, 132, 51, .28) !important; border-radius: 0 14px 14px 0; }
 
 /* sidebar modules */
-.fx-side { margin: 0 0 18px !important; padding: 22px 20px !important; background: linear-gradient(160deg, #efe8d8, #e5dbc4) !important; border: 1px solid rgba(176, 132, 51, .35) !important; border-radius: 24px; box-shadow: 0 22px 40px -32px rgba(60, 40, 10, .7); }
+.fx-side { overflow: visible !important; margin: 0 0 18px !important; padding: 22px 20px !important; background: linear-gradient(160deg, #efe8d8, #e5dbc4) !important; border: 1px solid rgba(176, 132, 51, .35) !important; border-radius: 24px; box-shadow: 0 22px 40px -32px rgba(60, 40, 10, .7); }
 .fx-side .inner { padding: 0 !important; background: none !important; border: 0 !important; }
 .fx-side br { display: none !important; }
 .fx-side__title { margin: 0 0 14px !important; padding: 0 !important; font: 700 24px/1.1 var(--fx-serif) !important; text-align: center; text-transform: none !important; color: #2a2118 !important; background: none !important; border: 0 !important; }
 .fx-side__body { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
 .fx-side--id { margin-top: 0 !important; }
-.fx-side--id .fx-side__body > img { display: block; width: 150px; height: 196px; max-width: 150px !important; max-height: 196px !important; margin-top: -88px; object-fit: cover; border-radius: 75px 75px 10px 10px; background: var(--fx-tint); box-shadow: 0 0 0 6px #ece3cf, 0 0 0 7px var(--fx-accent); }
+.fx-side--id .fx-side__body > img { display: block; width: 150px; height: 196px; max-width: 150px !important; max-height: 196px !important; margin-top: 0; object-fit: cover; border-radius: 75px 75px 10px 10px; background: var(--fx-tint); box-shadow: 0 0 0 6px #ece3cf, 0 0 0 7px var(--fx-accent); }
 .fx-side--id .fx-side__title { margin: 4px 0 0 !important; font-size: 32px !important; }
 .fx-side__rank { display: inline-flex; padding: 5px 14px; font: 600 10px/1.2 var(--fx-font); letter-spacing: .16em; text-transform: uppercase; color: #8a6a2c; background: rgba(176, 132, 51, .18); border-radius: 999px; }
 .fx-side__rank:empty { display: none; }
@@ -1387,7 +1389,7 @@ fieldset.fx-ghero__grid { display: flex !important; flex-wrap: wrap; align-items
 
 @media (max-width: 960px) {
   .fx-pview { flex-direction: column-reverse; }
-  .fx-pview__side { position: static; flex-basis: auto; width: 100% !important; margin-top: 70px !important; }
+  .fx-pview__side { position: static; flex-basis: auto; width: 100% !important; margin-top: 0 !important; }
   .fx-pview__main { width: 100% !important; }
 }
 @media (max-width: 860px) {
@@ -1399,4 +1401,91 @@ fieldset.fx-ghero__grid { display: flex !important; flex-wrap: wrap; align-items
   .fx-pfld__value { flex-basis: 100%; text-align: left; }
   .fx-sbox { flex-basis: 100%; }
   .fx-fbar { justify-content: stretch; }
+}
+
+
+/* ==========================================================================
+   16. USER CONTROL PANEL — tab bar + pages that come from generated markup
+     • #tabs is output by {UCP_TABS}, so it is styled by id
+     • friends/foes, followers, notifications, watched topics, favourites and
+       the signature editor are restyled from their rendered markup
+     • "legacy" = a UCP page that contains none of our fx- form classes
+   ========================================================================== */
+#tabs { margin: 0 0 18px !important; min-width: 0 !important; padding: 0 !important; line-height: normal; background: none !important; }
+#new-message #tabs { margin: 0 !important; }
+#tabs ul { display: inline-flex !important; flex-wrap: wrap; gap: 2px; margin: 0 !important; padding: 5px !important; list-style: none !important; background: #f4f1ea !important; border: 1px solid #e8e3d9 !important; border-radius: 26px; }
+#tabs li { display: flex !important; float: none !important; margin: 0 !important; padding: 0 !important; list-style: none !important; background: none !important; border: 0 !important; }
+#tabs li a { display: flex !important; float: none !important; margin: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; border-radius: 999px; text-decoration: none !important; }
+#tabs li a:not(:has(> span)) { padding: 10px 14px !important; font: 600 10.5px/1 "Inter", "Segoe UI", system-ui, sans-serif !important; letter-spacing: .08em; text-transform: uppercase; color: #8b857b !important; white-space: nowrap; }
+#tabs li a span { display: block !important; float: none !important; padding: 10px 14px !important; background: none !important; border-radius: 999px; font: 600 10.5px/1 "Inter", "Segoe UI", system-ui, sans-serif !important; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; color: #8b857b !important; transition: background .2s, color .2s; }
+#tabs li a:hover span, #tabs li a:not(:has(> span)):hover { background: #fff !important; color: #1e1c19 !important; }
+#tabs li.activetab a span, #tabs li.activetab a:not(:has(> span)) { background: #1e1c19 !important; color: #fff !important; }
+
+/* shell around every UCP page: no blue box */
+.panel.row3:has(> .inner > .ucp-main), #tabs + .panel.row3 { background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
+.panel.row3:has(> .inner > .ucp-main) > .inner, #tabs + .panel.row3 > .inner { padding: 0 !important; background: none !important; }
+
+/* signature editor (inside .fx-fsig) */
+.fx-fsig .corners-top, .fx-fsig .corners-bottom { display: none !important; }
+.fx-fsig :is(h1, h2, h3) { margin: 0 0 16px !important; padding: 0 !important; background: none !important; border: 0 !important; font: 700 30px/1 var(--fx-serif) !important; text-transform: none !important; color: #2a2118 !important; }
+.fx-fsig .panel { margin: 0 0 14px !important; padding: 18px !important; background: #fffdf9 !important; border: 1px solid rgba(176, 132, 51, .28) !important; border-radius: 18px; box-shadow: 0 12px 24px -20px rgba(60, 40, 10, .6); }
+.fx-fsig .panel .inner { padding: 0 !important; background: none !important; }
+.fx-fsig :is(.row1, .row2, .row3, .bg1, .bg2) { background-color: transparent !important; }
+.fx-fsig .panel:is(.row1, .row2, .row3, .bg1, .bg2) { background-color: #fffdf9 !important; }
+.fx-fsig fieldset.submit-buttons { margin: 0 !important; padding: 14px 20px !important; background: #fffdf9 !important; border: 1px solid rgba(176, 132, 51, .28) !important; border-radius: 20px; }
+.fx-fsig .sceditor-container, .fx-fsig textarea { max-width: 100%; }
+
+/* legacy UCP pages */
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) { float: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; background: none !important; color: #1e1c19; font-family: "Inter", "Segoe UI", system-ui, sans-serif; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(h1, h2, h3) {
+  display: flex !important; align-items: center; gap: 14px; margin: 0 0 18px !important; padding: 0 !important; background: none !important; border: 0 !important;
+  font: 700 30px/1 "Cormorant Garamond", "Playfair Display", Georgia, serif !important; letter-spacing: -.02em; text-transform: none !important; color: #2a2118 !important;
+}
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(h1, h2, h3)::before { content: ""; flex: 0 0 auto; width: 11px; height: 11px; margin: 0 6px 0 4px; transform: rotate(45deg); background: #b08433; box-shadow: 0 0 0 4px rgba(176, 132, 51, .22), 0 0 0 9px rgba(176, 132, 51, .1); }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(h1, h2, h3)::after { content: ""; flex: 1 1 auto; height: 2px; border-radius: 2px; background: linear-gradient(to right, #b08433, rgba(176, 132, 51, 0)); }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .corners-top, :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .corners-bottom { display: none !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel {
+  margin: 0 0 24px !important; padding: 24px 28px !important; background: linear-gradient(160deg, #efe8d8, #e5dbc4) !important;
+  border: 1px solid rgba(176, 132, 51, .35) !important; border-radius: 24px; box-shadow: 0 22px 40px -32px rgba(60, 40, 10, .7);
+}
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel .inner { padding: 0 !important; background: none !important; border: 0 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel p { margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: #6d5120; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel p.center, :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel dd em, :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel p em { font-style: normal; color: #8b857b; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) dl { display: flex !important; flex-wrap: wrap; align-items: center; gap: 10px 28px; margin: 0 0 10px !important; padding: 14px 20px !important; background: #fffdf9 !important; border: 1px solid rgba(176, 132, 51, .28) !important; border-radius: 16px; box-shadow: 0 12px 24px -20px rgba(60, 40, 10, .6); }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) dt { flex: 0 0 min(34%, 320px); float: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; text-align: left !important; font: 600 13px/1.4 "Inter", "Segoe UI", system-ui, sans-serif !important; color: #1e1c19 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) dd { flex: 1 1 240px; min-width: 0; float: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; font-size: 13px; line-height: 1.6; color: #1e1c19; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) a:not([class*="button"]) { color: #8a6a2c; text-decoration: none; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) a:not([class*="button"]):hover { color: #b08433; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], input:not([type]), select) {
+  height: 42px; min-width: 220px; max-width: 100%; margin: 0 6px 0 0; padding: 0 14px; font: 400 13px "Inter", "Segoe UI", system-ui, sans-serif; color: #1e1c19; background: #fff; border: 1px solid #e8e3d9; border-radius: 12px; box-shadow: none;
+}
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input[type="text"], input[type="password"], select):focus { outline: 0; border-color: #b08433; box-shadow: 0 0 0 3px rgba(176, 132, 51, .13); }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input[type="submit"], input[type="button"], input[type="reset"], button, a.button1, a.button2) {
+  display: inline-flex; align-items: center; height: 40px; margin: 0 6px 0 0; padding: 0 22px; cursor: pointer;
+  font: 600 11px "Inter", "Segoe UI", system-ui, sans-serif !important; letter-spacing: .14em; text-transform: uppercase; color: #fff !important; background: #1e1c19 !important; border: 0 !important; border-radius: 999px; text-decoration: none;
+  transition: background .2s, color .2s, transform .2s;
+}
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input[type="submit"], input[type="button"], input[type="reset"], button, a.button1, a.button2):hover { color: #1e1c19 !important; background: #b08433 !important; transform: translateY(-1px); }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input.button1, a.button1) { color: #1e1c19 !important; background: #b08433 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input.button1, a.button1):hover { background: #c79a42 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) :is(input[name="delete"], input[name="deleteall"], input[name="remove"]) { background: #8c2f2f !important; color: #fff !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) input[type="checkbox"] { -webkit-appearance: none; appearance: none; position: relative; display: inline-block; width: 22px; height: 22px; margin: 0; vertical-align: middle; cursor: pointer; background: #fff; border: 2px solid #cdbf9f; border-radius: 8px; transition: background .2s, border-color .2s; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) input[type="checkbox"]:checked { background: #b08433; border-color: #b08433; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) input[type="checkbox"]:checked::after { content: ""; position: absolute; left: 6px; top: 1px; width: 5px; height: 11px; border: solid #1e1c19; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) input[type="checkbox"]:disabled { opacity: .4; cursor: default; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) table { width: 100%; border-collapse: separate !important; border-spacing: 0 8px !important; background: none !important; border: 0 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) table th { padding: 6px 14px !important; text-align: left; font: 600 10px/1.3 "Inter", "Segoe UI", system-ui, sans-serif !important; letter-spacing: .16em; text-transform: uppercase; color: #8a6a2c !important; background: none !important; border: 0 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) table td { padding: 12px 14px !important; font-size: 13px; color: #1e1c19; background: #fffdf9 !important; border: 0 !important; border-top: 1px solid rgba(176, 132, 51, .28) !important; border-bottom: 1px solid rgba(176, 132, 51, .28) !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) table td:first-child { border-left: 1px solid rgba(176, 132, 51, .28) !important; border-radius: 14px 0 0 14px; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) table td:last-child { border-right: 1px solid rgba(176, 132, 51, .28) !important; border-radius: 0 14px 14px 0; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) table td img { display: inline-block; vertical-align: middle; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .right-box, :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) p.right-box { display: flex; justify-content: flex-end; gap: 8px; float: none !important; margin: 10px 0 0 !important; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .pagination { float: none !important; margin: 14px 0 0 !important; font-size: 12px; color: #8b857b; text-align: right; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .pagination strong { padding: 3px 9px; color: #fff; background: #1e1c19; border-radius: 8px; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .pagination a { padding: 3px 9px; border-radius: 8px; background: #f4f1ea; }
+:is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) form > p.center, :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .submit-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 24px !important; padding: 0 !important; background: none !important; border: 0 !important; }
+
+@media (max-width: 860px) {
+  :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) .panel { padding: 18px 16px !important; }
+  :is(.ucp-main, #tabs + .panel.row3):not(.fx-fpanel, .fx-ucp, :has(.fx-fpanel, .fx-field)) dt { flex-basis: 100%; }
 }
