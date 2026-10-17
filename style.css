@@ -2048,3 +2048,102 @@ div.pagination.fx-modpage__nav { float: none !important; margin: 14px 4px !impor
   .fx-search input.fx-search__btn { flex: 1 1 auto; }
   .fx-search__opts .fx-field__control select { max-width: 100%; }
 }
+
+/* ==========================================================================
+   21. FORUM PAGE — viewforum_body (tools row, action bar, sort/jump, info cards, legend)
+     • .fx-vf__tools     mark-read / plus-menu on the left, pagination pills on the right
+     • .fx-vf__actions   New topic · breadcrumb · search (re-ordered with flex `order`)
+     • .fx-vf__boxes     sort + jump forms
+     • .fx-vf__info      moderators + permissions as two sand cards;  .fx-vf__legend icon key
+     Edit the button text:  .fx-vf__new { --fx-pm-new-label: "New topic"; }
+   ========================================================================== */
+.fx-vf__new { --fx-pm-new-label: "New topic"; }
+.fx-vf__tools br, .fx-vf__foot br, .fx-vf__boxes br, .fx-vf__search br { display: none !important; }
+
+/* tools row above the list */
+div.pagination.fx-vf__tools {
+  float: none !important; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin: 0 0 14px !important; padding: 0 !important;
+  font: 400 12px/1.4 var(--fx-font); color: var(--fx-muted); text-align: left;
+}
+.fx-vf__tool a, .fx-vf__links a {
+  display: inline-block; padding: 8px 14px; font: 600 10.5px/1 var(--fx-font); letter-spacing: .12em; text-transform: uppercase;
+  color: #6d5120 !important; text-decoration: none; background: rgba(176, 132, 51, .14); border-radius: 999px; transition: background .2s, color .2s;
+}
+.fx-vf__tool a:hover, .fx-vf__links a:hover { background: var(--fx-ink); color: #fff !important; }
+.fx-vf__pages { margin-left: auto; font-size: 12px; color: var(--fx-muted); }
+.fx-vf__pages a, .fx-vf__pages strong { display: inline-block; min-width: 30px; margin: 0 1px; padding: 7px 10px; text-align: center; text-decoration: none; border-radius: 10px; }
+.fx-vf__pages a { color: var(--fx-ink) !important; background: var(--fx-tint); }
+.fx-vf__pages a:hover { background: #eadfc6; }
+.fx-vf__pages strong { color: #fff; background: var(--fx-ink); }
+
+/* action bar: New topic · path · search */
+.fx-vf__actions, .fx-vf__actions.topic-actions { gap: 12px 20px; height: auto !important; min-height: 0 !important; }
+.fx-vf__new { order: 1; }
+.fx-vf__actions > .fx-vf__path, .fx-vf__path { order: 2; flex: 1 1 200px; margin: 0 !important; padding: 0 !important; float: none !important; font-size: 12px; }
+.fx-vf__search { order: 3; float: none !important; margin: 0 0 0 auto !important; padding: 0 !important; background: none !important; border: 0 !important; }
+.fx-vf__search form { margin: 0; }
+.fx-vf__search fieldset { display: flex; align-items: center; gap: 8px; margin: 0 !important; padding: 0 !important; border: 0 !important; background: none !important; min-width: 0; }
+.fx-vf__search input.fx-vf__q {
+  width: 190px !important; max-width: 100%; height: 42px; margin: 0; padding: 0 18px; font: 400 13px var(--fx-font); color: var(--fx-ink); background: #fff;
+  border: 1px solid var(--fx-line); border-radius: 999px; box-shadow: none; transition: border-color .2s, box-shadow .2s;
+}
+.fx-vf__search input.fx-vf__q:focus { outline: 0; border-color: var(--fx-accent); box-shadow: 0 0 0 3px var(--fx-accent-soft); }
+input.button2.fx-vf__go, input.button2.fx-vf__btn {
+  height: 42px; margin: 0; padding: 0 22px; cursor: pointer; font: 600 11px var(--fx-font) !important; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff !important; background: #1e1c19 !important; border: 0 !important; border-radius: 999px; transition: background .2s, color .2s, transform .2s;
+}
+input.button2.fx-vf__go:hover, input.button2.fx-vf__btn:hover { color: #1e1c19 !important; background: #b08433 !important; transform: translateY(-1px); }
+
+/* bottom of the list */
+.fx-vf__actions--foot { margin-top: 18px !important; }
+div.pagination.fx-vf__foot { order: 2; float: none !important; margin: 0 0 0 auto !important; padding: 0 !important; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; text-align: right; font-size: 12px; color: var(--fx-muted); }
+.fx-vf__links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+
+/* sort + jump */
+.fx-vf__boxes { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin: 14px 0 22px !important; padding: 14px 18px !important; background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 20px; }
+.fx-vf__boxes::before, .fx-vf__boxes::after { display: none !important; }
+.fx-vf__boxes .fx-vf__sortbox, .fx-vf__boxes .fx-vf__form { float: none !important; margin: 0 !important; padding: 0 !important; width: auto !important; }
+.fx-vf__boxes fieldset.fx-vf__fs { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 !important; padding: 0 !important; border: 0 !important; background: none !important; min-width: 0; }
+.fx-vf__boxes label { font: 600 10.5px/1 var(--fx-font); letter-spacing: .14em; text-transform: uppercase; color: #8a6a2c; }
+.fx-vf__boxes select { min-width: 180px; max-width: 280px; height: 42px; padding: 0 14px; font: 400 13px var(--fx-font); color: var(--fx-ink); background: #fff; border: 1px solid var(--fx-line); border-radius: 12px; }
+.fx-vf__boxes select:focus { outline: 0; border-color: var(--fx-accent); box-shadow: 0 0 0 3px var(--fx-accent-soft); }
+.fx-vf__boxes .fx-vf__sel { display: inline-flex; margin: 0; }
+.fx-vf__boxes .fx-vf__jump { margin-left: auto !important; }
+
+/* moderators + permissions */
+.fx-vf__more { margin: 8px 0 0; }
+.fx-vf__info { display: flex !important; flex-wrap: wrap; gap: 16px; margin: 0 0 8px !important; }
+.fx-vf__card {
+  flex: 1 1 280px; min-width: 0; padding: 22px 26px 20px; background: linear-gradient(160deg, #efe8d8, #e5dbc4);
+  border-radius: 6px 26px 6px 26px; box-shadow: 0 22px 36px -28px rgba(60, 40, 10, .55);
+}
+.fx-vf__card--mods { flex-grow: 0; flex-basis: 300px; }
+.fx-vf__card--perms { flex-grow: 2; flex-basis: 360px; }
+.fx-vf .fx-vf__cardtitle, .fx-vf__cardtitle {
+  display: flex !important; align-items: center; gap: 12px; margin: 0 0 12px !important; padding: 0 !important; float: none !important;
+  font: 600 10.5px/1 var(--fx-font) !important; letter-spacing: .18em; text-transform: uppercase !important; color: #8a6a2c !important; background: none !important; border: 0 !important;
+}
+.fx-vf__cardtitle::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; transform: rotate(45deg); background: var(--fx-accent); }
+.fx-vf__cardtitle strong { font-weight: inherit; }
+.fx-vf__cardbody { margin: 0 !important; padding: 0 !important; font: 400 13px/1.9 var(--fx-font); color: var(--fx-ink); }
+.fx-vf__cardbody a { color: #6d5120; font-weight: 600; }
+.fx-vf__perms strong { color: #6d5120; }
+
+/* legend */
+.fx-vf__legend { display: flex !important; flex-wrap: wrap; gap: 14px 44px; padding: 18px 24px !important; background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 20px; }
+.fx-vf__legend::after { display: none !important; }
+.fx-vf__icons { flex: 1 1 200px; display: flex; flex-direction: column; gap: 8px; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+.fx-vf__icons li { display: flex; align-items: center; gap: 10px; margin: 0 !important; padding: 0 !important; float: none !important; width: auto !important; list-style: none !important; background: none !important; font: 400 12px/1.4 var(--fx-font); color: var(--fx-muted); }
+.fx-vf__icons img { flex: 0 0 auto; width: auto; max-height: 22px; }
+
+@media (max-width: 860px) {
+  .fx-vf__pages { margin-left: 0; }
+  .fx-vf__search { order: 4; flex: 1 1 100%; margin: 0 !important; }
+  .fx-vf__search fieldset { width: 100%; }
+  .fx-vf__search input.fx-vf__q { flex: 1 1 auto; width: auto !important; }
+  div.pagination.fx-vf__foot { margin: 0 !important; align-items: flex-start; text-align: left; }
+  .fx-vf__links { justify-content: flex-start; }
+  .fx-vf__boxes .fx-vf__jump { margin-left: 0 !important; }
+  .fx-vf__boxes select { min-width: 0; flex: 1 1 140px; }
+  .fx-vf__card--mods, .fx-vf__card--perms { flex-basis: 100%; }
+}
