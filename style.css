@@ -2297,3 +2297,43 @@ ul#picture_legend.fx-ilegend { display: flex; flex-wrap: wrap; gap: 10px 12px; m
   .fx-intro .fx-intro__title { font-size: 24px !important; }
   .fx-who { padding: 18px 20px; }
 }
+
+/* ==========================================================================
+   24. TOPIC FOOTER EXTRAS — viewtopic_body
+     • .fx-watch    "watch / stop watching" link as a pill
+     • .fx-similar  "Similar topics" card (open + closed state), .fx-similar__head/__toggle/__title/__list/__item/__mark
+   ========================================================================== */
+.fx-watch.right { display: flex; justify-content: flex-end; float: none !important; margin: 8px 0 14px !important; padding: 0 !important; }
+.fx-watch a {
+  display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px 8px 14px;
+  font: 600 10.5px/1.2 var(--fx-font); letter-spacing: .12em; text-transform: uppercase; color: #8a6a2c !important; text-decoration: none !important;
+  background: #fffdf9; border: 1px solid rgba(176, 132, 51, .35); border-radius: 999px; transition: background .2s, border-color .2s, color .2s;
+}
+.fx-watch a::before { content: ""; flex: 0 0 auto; width: 7px; height: 7px; transform: rotate(45deg); background: #b08433; }
+.fx-watch a:hover { background: var(--fx-accent-soft); border-color: #b08433; color: var(--fx-ink) !important; }
+
+/* similar topics */
+.fx-similar.post { float: none !important; margin: 0 0 22px !important; padding: 18px 22px 20px !important; font-size: 13px !important; line-height: 1.5 !important; color: var(--fx-ink) !important; background: #fffdf9 !important; border: 1px solid rgba(176, 132, 51, .28) !important; border-left: 4px solid rgba(176, 132, 51, .55) !important; border-radius: 4px 18px 4px 18px !important; box-shadow: 0 12px 24px -22px rgba(60, 40, 10, .6); }
+.fx-similar .clear { display: none !important; }
+.fx-similar .fx-similar__head { display: flex; align-items: center; gap: 12px; margin: 0; padding: 0; }
+.fx-similar--open .fx-similar__head { padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px dashed var(--fx-line); }
+.fx-similar .fx-similar__toggle { flex: 0 0 auto; display: block; margin: 0; padding: 0; line-height: 0; }
+.fx-similar .fx-similar__toggle a { position: relative; display: block; width: 26px; height: 26px; border: 1px solid rgba(176, 132, 51, .55); border-radius: 50%; background: #fff; transition: background .2s, border-color .2s; }
+.fx-similar .fx-similar__toggle a:hover { background: var(--fx-accent-soft); border-color: #b08433; }
+.fx-similar .fx-similar__toggle a::before, .fx-similar--closed .fx-similar__toggle a::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; margin: -.75px 0 0 -5px; background: #8a6a2c; pointer-events: none; }
+.fx-similar--closed .fx-similar__toggle a::after { width: 1.5px; height: 10px; margin: -5px 0 0 -.75px; }
+.fx-similar .fx-similar__toggle img { position: absolute; inset: 0; width: 100% !important; height: 100% !important; margin: 0; opacity: 0; cursor: pointer; }
+.fx-similar .fx-similar__title { margin: 0; padding: 0; font: 600 11px/1.2 var(--fx-font); letter-spacing: .18em; text-transform: uppercase; color: #8a6a2c; }
+.fx-similar .fx-similar__list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px 14px; margin: 0; padding: 0; }
+.fx-similar .fx-similar__list br { display: none; }
+.fx-similar .fx-similar__item { display: flex; align-items: baseline; gap: 10px; min-width: 0; padding: 9px 14px; background: var(--fx-paper); border: 1px solid var(--fx-line); border-radius: 12px; transition: border-color .2s, background .2s, transform .2s; }
+.fx-similar .fx-similar__item:hover { background: #fff; border-color: rgba(176, 132, 51, .55); transform: translateX(3px); }
+.fx-similar .fx-similar__mark { flex: 0 0 auto; width: 6px; height: 6px; font-size: 0; transform: rotate(45deg); background: #b08433; align-self: center; }
+.fx-similar .fx-similar__item a { min-width: 0; font: 400 15px/1.3 var(--fx-serif); font-weight: 600; color: var(--fx-ink) !important; text-decoration: none !important; overflow-wrap: anywhere; }
+.fx-similar .fx-similar__item a:hover { color: #8a6a2c !important; }
+
+@media (max-width: 860px) {
+  .fx-similar.post { padding: 16px 16px 18px !important; }
+  .fx-similar .fx-similar__list { grid-template-columns: 1fr; }
+  .fx-watch.right { justify-content: center; }
+}
