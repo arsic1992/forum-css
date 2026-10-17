@@ -2196,3 +2196,104 @@ div.pagination.fx-vf__foot { order: 2; float: none !important; margin: 0 0 0 aut
   .fx-foot .fx-foot__links, .fx-foot .fx-foot__list { margin-left: 0 !important; justify-content: flex-start; }
   .fx-foot p.fx-foot__admin { text-align: left; }
 }
+
+/* ==========================================================================
+   23. INDEX PAGE WRAPPER — index_body
+     • .fx-ilogin   inline login bar (header + footer copies)      • .fx-intro  welcome message card
+     • .fx-who      who is online                                  • .fx-stats  three statistic tiles
+     • .fx-ilegend  forum icon key                                 • .fx-sechead links inherit colour
+   ========================================================================== */
+.fx-sechead a { color: inherit !important; text-decoration: none !important; border-bottom: 1px solid transparent; transition: border-color .2s; }
+.fx-sechead a:hover { border-bottom-color: currentColor; }
+.fx-ilogin :is(.corners-top, .corners-bottom), .fx-intro :is(.corners-top, .corners-bottom) { display: none !important; }
+
+/* login bar */
+.fx-ilogin.panel { margin: 0 0 22px !important; }
+.fx-ilogin .fx-ilogin__inner { padding: 6px 4px !important; background: none !important; }
+.fx-ilogin .fx-ilogin__form { margin: 0 !important; }
+.fx-ilogin .fx-ilogin__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 10px; margin: 0 !important; padding: 12px 18px !important; text-align: center; }
+.fx-ilogin .fx-ilogin__field {
+  display: flex; align-items: center; gap: 10px; height: 46px; margin: 0 !important; padding: 0 6px 0 16px;
+  background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 999px; transition: border-color .2s, box-shadow .2s;
+}
+.fx-ilogin .fx-ilogin__field:focus-within { border-color: var(--fx-accent); box-shadow: 0 0 0 3px var(--fx-accent-soft); }
+.fx-ilogin .fx-ilogin__label { font: 600 10px/1 var(--fx-font); letter-spacing: .14em; text-transform: uppercase; color: #8a6a2c; white-space: nowrap; }
+.fx-ilogin input.fx-ilogin__input {
+  width: 118px; max-width: 100%; height: 34px; margin: 0; padding: 0 14px; font: 400 13px var(--fx-font); color: var(--fx-ink);
+  background: #fff; border: 0 !important; border-radius: 999px; box-shadow: none; outline: 0;
+}
+.fx-ilogin .fx-ilogin__auto { display: inline-flex; align-items: center; gap: 10px; margin: 0 !important; cursor: pointer; }
+.fx-ilogin input.fx-ilogin__check {
+  -webkit-appearance: none; appearance: none; position: relative; flex: 0 0 auto; width: 22px; height: 22px; margin: 0; cursor: pointer;
+  background: #fff; border: 2px solid #cdbf9f; border-radius: 8px; transition: background .2s, border-color .2s;
+}
+.fx-ilogin input.fx-ilogin__check:checked { background: var(--fx-accent); border-color: var(--fx-accent); }
+.fx-ilogin input.fx-ilogin__check:checked::after { content: ""; position: absolute; left: 6px; top: 1px; width: 5px; height: 11px; border: solid var(--fx-ink); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+.fx-ilogin input.fx-ilogin__btn {
+  height: 46px; margin: 0; padding: 0 30px; cursor: pointer; font: 600 11px var(--fx-font) !important; letter-spacing: .14em; text-transform: uppercase;
+  color: #1e1c19 !important; background: #b08433 !important; border: 0 !important; border-radius: 999px; transition: background .2s, transform .2s;
+}
+.fx-ilogin input.fx-ilogin__btn:hover { background: #c79a42 !important; transform: translateY(-1px); }
+.fx-ilogin .fx-ilogin__social { flex: 1 1 100%; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 4px 0 0; }
+
+/* welcome message */
+.fx-intro.panel {
+  float: none !important; margin: 0 0 28px !important; padding: 0 !important; background: linear-gradient(160deg, #efe8d8, #e5dbc4) !important; border: 0 !important;
+  border-radius: 6px 28px 6px 28px !important; box-shadow: 0 24px 40px -28px rgba(60, 40, 10, .55) !important;
+}
+.fx-intro .fx-intro__inner { padding: 28px 34px 30px !important; background: none !important; }
+.fx-intro .fx-intro__title {
+  position: relative; margin: 0 0 14px !important; padding: 0 0 0 24px !important; font: 600 30px/1.15 var(--fx-serif) !important; letter-spacing: -.01em; text-transform: none !important;
+  color: var(--fx-ink) !important; background: none !important; border: 0 !important;
+}
+.fx-intro .fx-intro__title::before { content: ""; position: absolute; left: 0; top: .5em; width: 9px; height: 9px; transform: rotate(45deg); background: var(--fx-accent); }
+.fx-intro .fx-intro__text { font: 400 14.5px/1.8 var(--fx-read); color: var(--fx-ink); }
+.fx-intro .fx-intro__text a { color: #8a6a2c; }
+.fx-intro .fx-intro__text img { max-width: 100%; height: auto; }
+
+/* who is online */
+.fx-idx { clear: both; margin: 12px 0 0; }
+.fx-idx .fx-sechead:first-child { margin-top: 20px !important; }
+.fx-who { padding: 22px 28px; background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 20px; box-shadow: 0 12px 24px -22px rgba(60, 40, 10, .6); }
+.fx-who__icon { display: none !important; }
+.fx-who__body { margin: 0 !important; padding: 0 !important; font: 400 13px/1.8 var(--fx-font); color: var(--fx-ink); }
+.fx-who__body br { display: none; }
+.fx-who__total { display: block; font: 600 19px/1.4 var(--fx-serif); color: var(--fx-ink); }
+.fx-who__record { display: block; margin-top: 2px; font-size: 11.5px; letter-spacing: .03em; color: var(--fx-muted); }
+.fx-who__list { display: block; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--fx-line); }
+.fx-who__birthdays { display: block; margin-top: 8px; }
+.fx-who__birthdays:empty { display: none; }
+.fx-who__body a { font-weight: 600; text-decoration: none; }
+.fx-who__body a:hover { text-decoration: underline; }
+.fx-who em.fx-who__legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin-top: 14px; padding-top: 14px; font: 600 10px/1.4 var(--fx-font); font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--fx-muted); border-top: 1px dashed var(--fx-line); }
+.fx-who__legend a, .fx-who__legend span { padding: 4px 11px; font-size: 11px; letter-spacing: .04em; text-transform: none; background: #f4f1ea; border-radius: 999px; }
+.fx-who__legend a span { padding: 0; background: none; border-radius: 0; }
+
+/* statistics */
+.fx-stats { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 6px; }
+.fx-stats .fx-stats__tile {
+  flex: 1 1 220px; margin: 0 !important; padding: 20px 24px !important; font: 400 12.5px/1.6 var(--fx-font); letter-spacing: .02em; color: var(--fx-muted);
+  background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 18px; box-shadow: 0 12px 24px -22px rgba(60, 40, 10, .6);
+}
+.fx-stats__tile strong { display: inline-block; margin: 0 3px; font: 600 28px/1.1 var(--fx-serif); letter-spacing: -.01em; color: var(--fx-ink); vertical-align: -2px; }
+.fx-stats__tile a { color: #8a6a2c; font-weight: 600; text-decoration: none; }
+.fx-stats__tile a:hover { text-decoration: underline; }
+.fx-chatters { margin: 14px 0 0 !important; padding: 16px 24px !important; font: 400 13px/1.7 var(--fx-font); color: var(--fx-ink); background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 18px; }
+.fx-chatters br { display: none; }
+
+/* icon key */
+ul#picture_legend.fx-ilegend { display: flex; flex-wrap: wrap; gap: 10px 12px; margin: 22px 0 6px !important; padding: 0 !important; list-style: none !important; float: none !important; background: none !important; }
+.fx-ilegend .fx-ilegend__item {
+  display: inline-flex; align-items: center; gap: 10px; float: none !important; margin: 0 !important; padding: 8px 18px 8px 14px !important; list-style: none !important;
+  font: 600 10.5px/1.2 var(--fx-font); letter-spacing: .1em; text-transform: uppercase; color: var(--fx-muted); background: #fffdf9; border: 1px solid rgba(176, 132, 51, .28); border-radius: 999px;
+}
+.fx-ilegend__item img { width: auto; max-height: 20px; margin: 0 !important; }
+
+@media (max-width: 860px) {
+  .fx-ilogin .fx-ilogin__field { width: 100%; padding-left: 16px; }
+  .fx-ilogin .fx-ilogin__field input.fx-ilogin__input { flex: 1 1 auto; width: auto; }
+  .fx-ilogin input.fx-ilogin__btn { width: 100%; }
+  .fx-intro .fx-intro__inner { padding: 22px 20px 24px !important; }
+  .fx-intro .fx-intro__title { font-size: 24px !important; }
+  .fx-who { padding: 18px 20px; }
+}
