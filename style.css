@@ -2147,3 +2147,52 @@ div.pagination.fx-vf__foot { order: 2; float: none !important; margin: 0 0 0 aut
   .fx-vf__boxes select { min-width: 0; flex: 1 1 140px; }
   .fx-vf__card--mods, .fx-vf__card--perms { flex-basis: 100%; }
 }
+
+/* ==========================================================================
+   22. PAGE FOOTER — overall_footer_begin + overall_footer_end
+     • #page-footer.fx-foot  hairline with diamond, home pill, footer links, admin/copyright line
+     (the two templates only gained classes; the wrapper <div> structure is untouched)
+   ========================================================================== */
+#page-footer.fx-foot { position: relative; clear: both; margin: 56px 0 0 !important; padding: 34px 0 6px !important; background: none !important; border: 0 !important; }
+#page-footer.fx-foot::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: linear-gradient(to right, rgba(176, 132, 51, .6), rgba(176, 132, 51, .08)); }
+#page-footer.fx-foot::after { content: ""; position: absolute; left: 24px; top: -4px; width: 9px; height: 9px; transform: rotate(45deg); background: #b08433; box-shadow: 0 0 0 4px #fff; }
+.fx-foot :is(.corners-top, .corners-bottom) { display: none !important; }
+
+.fx-foot .navbar.fx-foot__bar { margin: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+.fx-foot .fx-foot__inner { display: flex !important; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; margin: 0 !important; padding: 0 !important; background: none !important; }
+.fx-foot ul.fx-foot__row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 0 !important; padding: 0 !important; list-style: none !important; background: none !important; border: 0 !important; }
+.fx-foot ul.fx-foot__row > li { float: none !important; margin: 0 !important; padding: 0 !important; list-style: none !important; background: none !important; border: 0 !important; font: 600 10.5px/1 var(--fx-font); letter-spacing: .12em; text-transform: uppercase; color: var(--fx-muted); }
+.fx-foot .fx-foot__gap { display: none !important; }
+
+/* home pill */
+.fx-foot a.fx-foot__homelink {
+  display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; font: 600 11px/1 var(--fx-font); letter-spacing: .14em; text-transform: uppercase;
+  color: #fff !important; text-decoration: none; background: #1e1c19 !important; border-radius: 999px; transition: background .2s, color .2s, transform .2s;
+}
+.fx-foot a.fx-foot__homelink::before { content: ""; width: 7px; height: 7px; transform: rotate(45deg); background: #b08433; }
+.fx-foot a.fx-foot__homelink:hover { color: #1e1c19 !important; background: #b08433 !important; transform: translateY(-1px); }
+.fx-foot a.fx-foot__homelink:hover::before { background: #1e1c19; }
+
+/* footer links */
+.fx-foot .fx-foot__links { margin-left: auto !important; justify-content: flex-end; }
+.fx-foot .fx-foot__list { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 6px 8px; }
+.fx-foot .fx-foot__sep { display: none; }
+.fx-foot a.fx-foot__link { display: inline-block; padding: 8px 14px; color: #6d5120 !important; text-decoration: none; background: rgba(176, 132, 51, .12); border-radius: 999px; transition: background .2s, color .2s; }
+.fx-foot a.fx-foot__link:hover { color: #fff !important; background: #1e1c19; }
+
+/* admin / copyright line */
+.fx-foot p.fx-foot__admin { flex: 1 1 100%; margin: 26px 0 0 !important; padding: 0 !important; float: none !important; text-align: center; font: 400 11px/1.6 var(--fx-font); letter-spacing: .04em; color: var(--fx-muted); }
+.fx-foot p.fx-foot__admin strong { font-weight: 600; }
+.fx-foot p.fx-foot__admin a { color: #8a6a2c !important; text-decoration: none; border-bottom: 1px solid rgba(176, 132, 51, .4); }
+.fx-foot p.fx-foot__admin a:hover { color: #1e1c19 !important; border-bottom-color: #1e1c19; }
+
+/* push-notification subscribe chip (added by the footer script) */
+.fx-foot #sub-to-pushs { display: inline-flex; align-items: center; gap: 6px; margin-left: 10px; padding: 8px 14px; cursor: pointer; color: #6d5120; background: rgba(176, 132, 51, .12); border-radius: 999px; }
+.fx-foot #sub-to-pushs svg { width: 13px; height: 13px; fill: currentColor; }
+.fx-foot #sub-to-pushs:hover { color: #fff; background: #1e1c19; }
+
+@media (max-width: 860px) {
+  #page-footer.fx-foot { margin-top: 40px !important; }
+  .fx-foot .fx-foot__links, .fx-foot .fx-foot__list { margin-left: 0 !important; justify-content: flex-start; }
+  .fx-foot p.fx-foot__admin { text-align: left; }
+}
