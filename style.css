@@ -2337,3 +2337,86 @@ ul#picture_legend.fx-ilegend { display: flex; flex-wrap: wrap; gap: 10px 12px; m
   .fx-similar .fx-similar__list { grid-template-columns: 1fr; }
   .fx-watch.right { justify-content: center; }
 }
+
+/* ==========================================================================
+   25. HERO HEADER — overall_header
+   The image set in Admin > Display > Logo ({LOGO}) becomes a full-width banner. Any size or ratio works:
+   it is scaled to cover the banner and centred. The site title / description (if enabled in the admin)
+   float over it. The search box becomes a pill that straddles the bottom edge.
+     • .fx-hero (= #page-header, now OUTSIDE #wrap so it can span the whole window)
+     • .fx-hero__bar / __inner / __stage / __link / __img / __title / __tag   banner
+     • .fx-hero__search / __form                                              search pill
+   Tweaks on .fx-hero:   --fx-hero-h  banner height   |   --fx-hero-bleed  pulls the banner outwards if
+   your page body has side padding (e.g. 20px)       |   --fx-hero-shade  darkness of the overlay
+   ========================================================================== */
+.fx-hero {
+  --fx-hero-h: clamp(230px, 32vw, 440px);
+  --fx-hero-bleed: 0px;
+  --fx-hero-shade: .5;
+  position: relative; display: block; width: auto !important; float: none !important;
+  margin: 0 calc(-1 * var(--fx-hero-bleed)) 46px !important; padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important;
+}
+.fx-hero .fx-hero__bar {
+  position: relative; float: none !important; height: var(--fx-hero-h); margin: 0 !important; padding: 0 !important; overflow: hidden;
+  background: #1e1c19 !important; border: 0 !important; border-bottom: 1px solid var(--fx-accent) !important; border-radius: 0 !important; box-shadow: none !important;
+}
+.fx-hero .fx-hero__inner { height: 100%; margin: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; }
+.fx-hero .fx-hero__stage {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  float: none !important; width: auto !important; height: 100%; margin: 0 !important; padding: 0 24px 30px !important; text-align: center; background: none !important;
+}
+.fx-hero .fx-hero__stage::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(30, 28, 25, calc(var(--fx-hero-shade) * .7)) 0%, rgba(30, 28, 25, 0) 38%, rgba(30, 28, 25, var(--fx-hero-shade)) 100%),
+    radial-gradient(ellipse at 50% 55%, transparent 40%, rgba(30, 28, 25, .35) 100%);
+}
+.fx-hero .fx-hero__link { position: absolute; inset: 0; z-index: 0; display: block; float: none !important; margin: 0 !important; padding: 0 !important; overflow: hidden; }
+.fx-hero .fx-hero__img {
+  display: block; width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important;
+  object-fit: cover; object-position: center; animation: fx-hero-drift 40s ease-in-out infinite alternate;
+}
+@keyframes fx-hero-drift { from { transform: scale(1); } to { transform: scale(1.07); } }
+@media (prefers-reduced-motion: reduce) { .fx-hero .fx-hero__img { animation: none; } }
+
+.fx-hero .fx-hero__title {
+  position: relative; z-index: 2; margin: 0 !important; padding: 0 !important; float: none !important;
+  font: 600 clamp(32px, 5.4vw, 68px)/1.04 var(--fx-serif) !important; letter-spacing: -.015em; color: #fff !important; text-transform: none !important; background: none !important; text-shadow: 0 2px 28px rgba(0, 0, 0, .55);
+}
+.fx-hero .fx-hero__tag {
+  position: relative; z-index: 2; margin: 0 !important; padding: 0 !important; float: none !important;
+  font: 600 clamp(10px, 1.1vw, 12.5px)/1.4 var(--fx-font) !important; letter-spacing: .32em; text-transform: uppercase; color: rgba(255, 255, 255, .88) !important; text-shadow: 0 1px 14px rgba(0, 0, 0, .6);
+}
+.fx-hero .fx-hero__title:empty, .fx-hero .fx-hero__tag:empty { display: none; }
+
+/* search pill straddling the banner's bottom edge */
+.fx-hero .fx-hero__search {
+  position: absolute; left: 50%; bottom: 0; z-index: 5; transform: translate(-50%, 50%);
+  width: min(560px, calc(100% - 32px)); float: none !important; margin: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important;
+}
+.fx-hero .fx-hero__search:not(:has(.fx-hero__form)) { display: none !important; }
+.fx-hero .fx-hero__search .inner { margin: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; }
+.fx-hero #search-box.fx-hero__form { position: static !important; float: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; background: none !important; border: 0 !important; }
+.fx-hero .fx-hero__form form { margin: 0; padding: 0; }
+.fx-hero .fx-hero__form p.nomargin {
+  display: flex; align-items: center; gap: 8px; margin: 0 !important; padding: 6px 6px 6px 24px !important;
+  background: #fffdf9; border: 1px solid rgba(176, 132, 51, .5); border-radius: 999px; box-shadow: 0 20px 38px -18px rgba(30, 20, 5, .6); transition: border-color .2s, box-shadow .2s;
+}
+.fx-hero .fx-hero__form p.nomargin:focus-within { border-color: #b08433; box-shadow: 0 0 0 4px var(--fx-accent-soft), 0 20px 38px -18px rgba(30, 20, 5, .6); }
+.fx-hero #search-box input#keywords.search {
+  flex: 1 1 auto; width: auto !important; min-width: 0; height: 42px; margin: 0 !important; padding: 0 !important;
+  font: 400 14px/1 var(--fx-font) !important; color: var(--fx-ink) !important; background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; outline: 0;
+}
+.fx-hero #search-box input.button2 {
+  flex: 0 0 auto; width: auto !important; height: 42px; margin: 0 !important; padding: 0 26px !important; cursor: pointer;
+  font: 600 11px/1 var(--fx-font) !important; letter-spacing: .14em; text-transform: uppercase; color: #fff !important; background: #b08433 !important; border: 0 !important; border-radius: 999px !important; box-shadow: none !important; transition: background .2s;
+}
+.fx-hero #search-box input.button2:hover { background: #8a6a2c !important; }
+
+@media (max-width: 860px) {
+  .fx-hero { --fx-hero-h: clamp(190px, 52vw, 280px); margin-bottom: 40px !important; }
+  .fx-hero .fx-hero__stage { padding: 0 18px 26px !important; }
+  .fx-hero .fx-hero__tag { letter-spacing: .2em; }
+  .fx-hero .fx-hero__form p.nomargin { padding-left: 18px !important; }
+  .fx-hero #search-box input.button2 { padding: 0 18px !important; }
+}
