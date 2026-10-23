@@ -1275,7 +1275,7 @@ a.legend-pill:hover {
 /* ---------- Form rows: dl = flex row ---------- */
 .pf fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .pf dl {
-	display: flex;
+	display: flex !important;
 	flex-wrap: wrap;
 	align-items: flex-start;
 	gap: 8px 24px;
@@ -1294,8 +1294,8 @@ a.legend-pill:hover {
 	max-width: 100%;
 	margin: 0;
 	padding-top: 8px;
-	float: none;
-	width: auto;
+	float: none !important;
+	width: auto !important;
 	font-weight: 600;
 	color: var(--pf-dark);
 }
@@ -1303,10 +1303,10 @@ a.legend-pill:hover {
 .pf dd {
 	flex: 1 1 280px;
 	min-width: 0;
-	margin: 0;
+	margin: 0 !important;
 	padding-top: 9px;
-	float: none;
-	width: auto;
+	float: none !important;
+	width: auto !important;
 	display: block;
 }
 .pf .italic, .pf dt .italic { font-style: normal; font-weight: 400; font-size: 12px; color: var(--pf-muted); }
@@ -1493,9 +1493,9 @@ a.legend-pill:hover {
    PROFILE ADVANCED  (profile_advanced_body)
    ===================================================================== */
 .pf-adv { gap: 0; }
-#profile-advanced-layout.pf { flex-direction: row; align-items: flex-start; gap: 22px; }
-.pf-adv #profile-advanced-left { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
-.pf-adv #profile-advanced-right { flex: 0 0 300px; display: flex; flex-direction: column; gap: 16px; }
+#profile-advanced-layout.pf { flex-direction: row !important; align-items: flex-start; gap: 20px; width: 100% !important; max-width: none !important; margin: 0 !important; }
+.pf-adv #profile-advanced-left { flex: 1 1 0 !important; width: auto !important; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.pf-adv #profile-advanced-right { flex: 0 0 280px !important; width: 280px !important; display: flex; flex-direction: column; gap: 16px; }
 
 /* tabs */
 .pf-adv #new-message { margin: 0; }
@@ -1567,9 +1567,9 @@ a.legend-pill:hover {
 /* profile fields */
 .pf-adv .middleline { display: flex; flex-direction: column; }
 .pf-adv #profile-tab-field-profil { display: flex; flex-direction: column; }
-.pf-adv #profile-tab-field-profil dl { padding: 11px 0; }
-.pf-adv #profile-tab-field-profil dt { flex: 0 0 200px; padding-top: 0; color: var(--pf-muted); font-weight: 500; font-size: 13px; }
-.pf-adv #profile-tab-field-profil dd { padding-top: 0; font-weight: 500; color: var(--pf-dark); }
+.pf-adv #profile-tab-field-profil dl { padding: 8px 12px; align-items: center; }
+.pf-adv #profile-tab-field-profil dt { flex: 0 0 160px; padding-top: 0; color: var(--pf-muted); font-weight: 500; font-size: 13px; }
+.pf-adv #profile-tab-field-profil dd { padding-top: 0 !important; text-align: left; font-weight: 500; color: var(--pf-dark); }
 .pf-adv .separator { display: none; }
 
 /* stats */
@@ -1634,7 +1634,8 @@ a.legend-pill:hover {
 
 /* attachments table */
 .pf-adv table.table1 { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--pf-line); border-radius: 12px; overflow: hidden; }
-.pf-adv table.table1 th { padding: 12px; background: var(--pf-grad); color: #fff; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; text-align: center; }
+.pf-adv table.table1 thead { background: var(--pf-grad); }
+.pf-adv table.table1 th { padding: 12px; background: transparent !important; color: #fff; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; text-align: center; }
 .pf-adv table.table1 td { padding: 12px; background: #fff; border-top: 1px solid var(--pf-line); text-align: center; }
 .pf-adv table.table1 tr:nth-child(even) td { background: var(--pf-soft); }
 .pf-adv .mobile-visible { display: none; }
@@ -1643,7 +1644,7 @@ a.legend-pill:hover {
 /* ---------- Smaller screens ---------- */
 @media (max-width: 900px) {
 	#profile-advanced-layout.pf { flex-direction: column-reverse; }
-	.pf-adv #profile-advanced-left, .pf-adv #profile-advanced-right { flex: 1 1 auto; width: 100%; }
+	.pf-adv #profile-advanced-left, .pf-adv #profile-advanced-right { flex: 1 1 auto !important; width: 100% !important; }
 }
 @media (max-width: 700px) {
 	.pf-inner, .pf-profile, .pf-cols { padding: 16px; }
@@ -1686,10 +1687,11 @@ a.legend-pill:hover {
 	overflow: hidden;
 	background: #fff;
 }
+.ucp-main table.table1 thead { background: linear-gradient(to right, rgb(176 85 154 / .9), rgb(255 160 104 / .9)); }
 .ucp-main table.table1 th {
 	padding: 12px 14px;
-	border: 0;
-	background: linear-gradient(to right, rgb(176 85 154 / .9), rgb(255 160 104 / .9));
+	border: 0 !important;
+	background: transparent !important;
 	color: #fff;
 	font-family: 'Poppins', sans-serif;
 	font-size: 12px;
@@ -1778,6 +1780,9 @@ a.legend-pill:hover {
 	.panel.row3:has(> .inner > .ucp-main) > .inner { padding: 14px; }
 	.ucp-main table.table1 th, .ucp-main table.table1 td { padding: 9px 8px; font-size: 12px; }
 }
+
+.pf .field_editable.invisible, .pf .invisible { display: none !important; }
+.pf-adv #profile-tab-field-profil dd img { max-width: 28px; height: auto; }
 
 
 .wl {
