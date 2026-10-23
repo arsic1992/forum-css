@@ -2490,35 +2490,52 @@ body.chatbox #divcolor-preview {
 }
 
 /* =====================================================================
-   Top bar: avatar menu + notification bell   (all new classes, light + dark)
+   TOP BAR ACCOUNT MENU  (avatar + bell + panels + pop-ups)
+   All new classes (tn-...), light and dark version.
+   This REPLACES the old ".topnav-user" / ".tu-..." rules: delete those.
    ===================================================================== */
 
-/* ---------- Colours ---------- */
-.topnav-user {
-	--tu-bg: #ffffff;
-	--tu-text: #455a64;
-	--tu-muted: #90a4ae;
-	--tu-hover: #f3f4f5;
-	--tu-line: #eeeeee;
-	--tu-shadow: 0 14px 36px rgba(0, 0, 0, .28);
-	--tu-accent: #ee7865;
-	--tu-grad: linear-gradient(135deg, rgb(176 85 154 / .95), rgb(255 160 104 / .95));
-}
-/* Dark version. I do not know which attribute / class your light-dark switch sets,
-   so the three most common ones are listed. Keep the one yours uses and delete the others. */
-:root[data-theme="dark"] .topnav-user,
-html.dark .topnav-user,
-body.dark .topnav-user {
-	--tu-bg: #1f2124;
-	--tu-text: #cfd8dc;
-	--tu-muted: #78909c;
-	--tu-hover: #2a2d31;
-	--tu-line: #33373c;
-	--tu-shadow: 0 14px 36px rgba(0, 0, 0, .6);
+/* ---------- 1. Hide the forum's own toolbar (it must stay in the page) ---------- */
+#fa_toolbar {
+	position: fixed !important;
+	left: -9999px !important;
+	top: 0 !important;
+	width: 1px !important;
+	height: 1px !important;
+	overflow: hidden !important;
+	visibility: hidden !important;
+	pointer-events: none !important;
 }
 
-/* ---------- Where it sits: left side of the bar ---------- */
-.topnav-user {
+/* ---------- 2. Colours ---------- */
+.tn-acts,
+.tn-toasts {
+	--tn-bg: #ffffff;
+	--tn-text: #455a64;
+	--tn-muted: #90a4ae;
+	--tn-hover: #f3f4f5;
+	--tn-line: #eeeeee;
+	--tn-shadow: 0 14px 36px rgba(0, 0, 0, .28);
+	--tn-accent: #ee7865;
+	--tn-grad: linear-gradient(135deg, rgb(176 85 154 / .95), rgb(255 160 104 / .95));
+}
+/* Dark version. Keep the line that matches your light / dark switch and delete the others. */
+:root[data-theme="dark"] .tn-acts, :root[data-theme="dark"] .tn-toasts,
+html.dark .tn-acts,                html.dark .tn-toasts,
+body.dark .tn-acts,                body.dark .tn-toasts {
+	--tn-bg: #1f2124;
+	--tn-text: #cfd8dc;
+	--tn-muted: #78909c;
+	--tn-hover: #2a2d31;
+	--tn-line: #33373c;
+	--tn-shadow: 0 14px 36px rgba(0, 0, 0, .6);
+}
+
+/* the "hidden" attribute must always win */
+.tn-acts[hidden], .tn-acts [hidden], .tn-toasts [hidden] { display: none !important; }
+
+/* ---------- 3. Place: left side of the bar ---------- */
+.tn-acts {
 	position: absolute;
 	left: 16px;
 	top: 0;
@@ -2528,43 +2545,46 @@ body.dark .topnav-user {
 	align-items: center;
 	gap: 8px;
 }
-.topnav-user:empty { display: none; }
+.topnav:has(.tn-acts:not([hidden])) { padding-left: 190px; }   /* room so the centered links never run underneath */
+.tn-act { position: relative; }
 
-/* leave room for it so the centered links never run underneath */
-.topnav:has(.topnav-user:not(:empty)) { padding-left: 190px; }
-
-/* ---------- Avatar button ---------- */
-.topnav-user .tu-menu { position: relative; }
-.topnav-user .tu-trigger {
+/* ---------- 4. Buttons (avatar and bell) ---------- */
+.tn-act__btn {
+	position: relative;
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	gap: 10px;
 	height: 44px;
-	padding: 0 14px 0 4px;
+	min-width: 44px;
+	margin: 0;
+	padding: 0;
+	border: 0;
 	border-radius: 999px;
 	background: rgba(255, 255, 255, .08);
 	color: #e6e6e6;
-	font-family: 'Poppins', sans-serif;
-	font-size: 13px;
-	font-weight: 500;
-	line-height: 1;
+	font: 500 13px/1 'Poppins', sans-serif;
 	cursor: pointer;
-	text-decoration: none;
-	transition: background .2s ease;
+	transition: background .2s ease, transform .2s ease;
 }
-.topnav-user .tu-trigger:hover,
-.topnav-user .tu-menu.is-open .tu-trigger { background: var(--tu-accent); color: #fff; }
-.topnav-user .tu-trigger::after {                    /* little arrow */
-	content: "";
-	width: 6px; height: 6px;
-	border: solid currentColor;
-	border-width: 0 2px 2px 0;
-	transform: translateY(-2px) rotate(45deg);
-	opacity: .7;
-	transition: transform .2s ease;
+.tn-act__btn:hover,
+.tn-act__btn[aria-expanded="true"] { background: var(--tn-accent); color: #fff; }
+.tn-act__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.tn-act__icon {
+	width: 22px; height: 22px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
-.topnav-user .tu-menu.is-open .tu-trigger::after { transform: translateY(1px) rotate(-135deg); }
-.topnav-user .tu-avatar {
+.tn-act__btn--bell .tn-act__icon { fill: currentColor; stroke-width: 1.4; }
+
+/* profile button: round avatar + name + little arrow */
+.tn-act--profile .tn-act__btn { padding: 0 14px 0 4px; }
+.tn-act--profile .tn-act__btn:not(.has-avatar) { padding: 0 14px 0 12px; }
+.tn-act__avatar {
 	width: 36px !important;
 	height: 36px !important;
 	max-width: none !important;
@@ -2573,32 +2593,21 @@ body.dark .topnav-user {
 	object-fit: cover;
 	border: 2px solid rgba(255, 255, 255, .75);
 }
-.topnav-user .tu-name { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* ---------- Bell button ---------- */
-.topnav-user .tu-bell { position: relative; }
-.topnav-user .tu-bell-btn {
-	position: relative;
-	display: block;
-	width: 44px;
-	height: 44px;
-	border-radius: 50%;
-	background-color: rgba(255, 255, 255, .08);
-	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23ffffff' d='M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22Zm7-6.5V11a7 7 0 0 0-5.5-6.84V3.5a1.5 1.5 0 0 0-3 0v.66A7 7 0 0 0 5 11v4.5L3 17.5V19h18v-1.5l-2-2Z'/></svg>");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 22px 22px;
-	font-size: 0;                                    /* hides the word "Notifications" */
-	color: transparent;
-	cursor: pointer;
-	text-decoration: none;
-	transition: background-color .2s ease, transform .2s ease;
+.tn-act__btn.has-avatar .tn-act__icon { display: none; }
+.tn-act__name { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tn-act--profile .tn-act__btn::after {
+	content: "";
+	width: 6px; height: 6px;
+	border: solid currentColor;
+	border-width: 0 2px 2px 0;
+	transform: translateY(-2px) rotate(45deg);
+	opacity: .7;
+	transition: transform .2s ease;
 }
-.topnav-user .tu-bell-btn:hover,
-.topnav-user .tu-bell.is-open .tu-bell-btn { background-color: var(--tu-accent); transform: translateY(-1px); }
+.tn-act--profile .tn-act__btn[aria-expanded="true"]::after { transform: translateY(1px) rotate(-135deg); }
 
 /* number of unread notifications */
-.topnav-user .tu-badge {
+.tn-act__badge {
 	position: absolute;
 	top: -3px;
 	right: -3px;
@@ -2612,61 +2621,42 @@ body.dark .topnav-user {
 	background: #e53935;
 	border: 2px solid #333;
 	color: #fff;
-	font-family: 'Poppins', sans-serif;
-	font-size: 11px;
-	font-weight: 700;
-	line-height: 1;
+	font: 700 11px/1 'Poppins', sans-serif;
 }
-.topnav-user .tu-badge:empty { display: none; }
 
-/* ---------- Both dropdowns: shared look ---------- */
-.topnav-user .tu-menulist,
-.topnav-user .tu-notifs {
-	display: block !important;                       /* open / closed is decided by .is-open only */
-	position: absolute !important;
-	top: calc(100% + 16px) !important;
-	left: 0 !important;
-	right: auto !important;
+/* ---------- 5. Panels (shared) ---------- */
+.tn-act__panel {
+	position: absolute;
+	top: calc(100% + 16px);
+	left: 0;
 	z-index: 100000;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	background: var(--tu-bg);
-	color: var(--tu-text);
+	width: 290px;
+	max-width: calc(100vw - 20px);
+	background: var(--tn-bg);
+	color: var(--tn-text);
 	border-radius: 12px;
-	box-shadow: var(--tu-shadow);
+	box-shadow: var(--tn-shadow);
 	overflow: hidden;
-	font-family: 'Poppins', sans-serif;
-	font-size: 13px;
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-	transform: translateY(8px);
-	transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+	font: 13px/1.5 'Poppins', sans-serif;
+	animation: tn-in .18s ease;
 }
-.topnav-user .tu-menu.is-open .tu-menulist,
-.topnav-user .tu-bell.is-open .tu-notifs {
-	opacity: 1;
-	visibility: visible;
-	pointer-events: auto;
-	transform: none;
+.tn-act__panel--notif { width: 360px; }
+@keyframes tn-in {
+	from { opacity: 0; transform: translateY(8px); }
+	to   { opacity: 1; transform: none; }
 }
 
-/* ---------- User menu ---------- */
-.topnav-user .tu-menulist { width: 270px; padding-bottom: 8px; }
-
-.topnav-user .tu-usercard {
-	display: grid;
-	grid-template-columns: 64px 1fr;
+/* ---------- 6. Profile panel ---------- */
+.tn-prof {
+	display: flex;
 	align-items: center;
-	gap: 6px 14px;
-	margin: 0 0 8px;
+	gap: 14px;
 	padding: 18px;
-	background: var(--tu-grad);
+	background: var(--tn-grad);
 	color: #fff;
 }
-.topnav-user .tu-usercard img {
-	grid-row: 1 / span 2;
+.tn-prof__img {
+	flex: 0 0 64px;
 	width: 64px !important;
 	height: 64px !important;
 	max-width: none !important;
@@ -2675,71 +2665,91 @@ body.dark .topnav-user {
 	object-fit: cover;
 	border: 3px solid rgba(255, 255, 255, .85);
 }
-.topnav-user .tu-rank {
-	justify-self: start;
-	padding: 3px 12px;
+.tn-prof__info { min-width: 0; }
+.tn-prof__name { display: block; font-size: 16px; font-weight: 600; line-height: 1.25; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tn-prof__rank {
+	display: inline-block;
+	margin-top: 4px;
+	padding: 2px 10px;
 	border-radius: 999px;
 	background: rgba(255, 255, 255, .25);
-	color: #fff !important;
-	font-size: 11px;
+	font-size: 10px;
 	font-weight: 600;
-	letter-spacing: .6px;
+	letter-spacing: .7px;
 	text-transform: uppercase;
-	text-decoration: none;
+	color: #fff;
 }
-.topnav-user .tu-usercard table { border-collapse: collapse; border: 0; background: none; width: auto; margin: 0; }
-.topnav-user .tu-usercard td { padding: 1px 8px 1px 0; border: 0; background: none; color: #fff; font-size: 12px; }
-.topnav-user .tu-usercard td:nth-child(2) { display: none; }       /* the " : " between label and number */
-.topnav-user .tu-usercard td.first { opacity: .85; }
-.topnav-user .tu-usercard td.bold { font-weight: 700; }
+.tn-prof__stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tn-prof__stat {
+	padding: 2px 10px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, .2);
+	font-size: 11px;
+	color: rgba(255, 255, 255, .9);
+}
+.tn-prof__stat b { margin-left: 3px; font-weight: 700; color: #fff; }
 
-.topnav-user .tu-menulist > li { margin: 0; padding: 0; list-style: none; }
-.topnav-user .tu-menulist > li > a {
+.tn-links { margin: 0; padding: 8px 0; list-style: none; }
+.tn-links li { display: block; margin: 0; padding: 0; list-style: none; }
+.tn-links a {
 	display: block;
 	padding: 10px 20px;
-	color: var(--tu-text);
+	color: var(--tn-text);
 	text-decoration: none;
 	transition: background .15s ease, color .15s ease, padding .15s ease;
 }
-.topnav-user .tu-menulist > li > a:hover { background: var(--tu-hover); color: var(--tu-accent); padding-left: 26px; }
-.topnav-user .tu-menulist > li.fa_separator { height: 1px; margin: 6px 0; background: var(--tu-line); }
-.topnav-user .tu-menulist > li:last-child > a { color: #e5565f; }
+.tn-links a:hover { background: var(--tn-hover); color: var(--tn-accent); padding-left: 26px; }
+.tn-links .is-sep { height: 1px; margin: 6px 0; background: var(--tn-line); }
+.tn-links a.is-out { color: #e5565f; }
 
-/* ---------- Notifications ---------- */
-.topnav-user .tu-notifs {
-	width: 350px;
-	max-height: 460px;
-	overflow-y: auto;
-	scrollbar-width: thin;
-	scrollbar-color: var(--tu-muted) transparent;
+/* ---------- 7. Notifications panel ---------- */
+.tn-notif__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 18px;
+	background: var(--tn-grad);
+	color: #fff;
 }
-.topnav-user .tu-notifs::-webkit-scrollbar { width: 6px; }
-.topnav-user .tu-notifs::-webkit-scrollbar-thumb { background: var(--tu-muted); border-radius: 6px; }
+.tn-notif__head strong { font-size: 14px; font-weight: 600; }
+.tn-notif__count {
+	min-width: 22px;
+	padding: 1px 8px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, .28);
+	font-size: 12px;
+	font-weight: 700;
+	text-align: center;
+}
 
-.topnav-user .tu-notifs > li {
-	position: relative;
+.tn-notif__list {
+	max-height: 380px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	border-bottom: 1px solid var(--tu-line);
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--tn-muted) transparent;
+}
+.tn-notif__list::-webkit-scrollbar { width: 6px; }
+.tn-notif__list::-webkit-scrollbar-thumb { background: var(--tn-muted); border-radius: 6px; }
+
+.tn-notif__item {
+	position: relative;
+	display: block;
+	margin: 0;
+	padding: 14px 40px 12px 18px;
+	list-style: none;
+	border-bottom: 1px solid var(--tn-line);
 	transition: background .15s ease;
 }
-.topnav-user .tu-notifs > li:hover { background: var(--tu-hover); }
-.topnav-user .tu-notifs .content { position: relative; padding: 14px 40px 12px 18px; }
-.topnav-user .tu-notifs hr { display: none; }
-.topnav-user .tu-notifs .contentText {
-	white-space: normal !important;                  /* the original cuts the text with "..." */
-	overflow: visible !important;
-	text-overflow: clip !important;
-	line-height: 1.55;
-	color: var(--tu-text);
-}
-.topnav-user .tu-notifs .contentText a { color: var(--tu-accent); font-weight: 600; text-decoration: none; }
-.topnav-user .tu-notifs .contentText a:hover { text-decoration: underline; }
-.topnav-user .tu-notifs .contentTime { margin-top: 5px; font-size: 11px; color: var(--tu-muted); }
+.tn-notif__item:hover { background: var(--tn-hover); }
+.tn-notif__text { line-height: 1.55; color: var(--tn-text); }
+.tn-notif__text a { color: var(--tn-accent); font-weight: 600; text-decoration: none; }
+.tn-notif__text a:hover { text-decoration: underline; }
+.tn-notif__time { margin-top: 4px; font-size: 11px; color: var(--tn-muted); }
 
-/* delete button (little x) */
-.topnav-user .tu-notifs a.delete {
+.tn-notif__del {
 	position: absolute;
 	top: 10px;
 	right: 12px;
@@ -2749,64 +2759,111 @@ body.dark .topnav-user {
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
-	color: var(--tu-muted);
+	color: var(--tn-muted);
 	text-decoration: none;
 	opacity: 0;
 	transition: opacity .15s ease, background .15s ease, color .15s ease;
 }
-.topnav-user .tu-notifs a.delete::before { content: "\00d7"; font-size: 18px; line-height: 1; }
-.topnav-user .tu-notifs > li:hover a.delete { opacity: 1; }
-.topnav-user .tu-notifs a.delete:hover { background: #e5565f; color: #fff; }
+.tn-notif__del::before { content: "\00d7"; font-size: 18px; line-height: 1; }
+.tn-notif__item:hover .tn-notif__del { opacity: 1; }
+.tn-notif__del:hover { background: #e5565f; color: #fff; }
 
-/* "See all the notifications" */
-.topnav-user .tu-notifs > li.see_all { border-bottom: 0; background: var(--tu-hover); }
-.topnav-user .tu-notifs > li.see_all:hover { background: var(--tu-hover); }
-.topnav-user .tu-notifs > li.see_all a {
+.tn-notif__empty { margin: 0; padding: 28px 18px; text-align: center; color: var(--tn-muted); }
+.tn-notif__all {
 	display: block;
 	padding: 13px 18px;
+	background: var(--tn-hover);
 	text-align: center;
 	font-weight: 600;
-	color: var(--tu-accent);
+	color: var(--tn-accent);
 	text-decoration: none;
 }
-.topnav-user .tu-notifs > li.see_all a:hover { text-decoration: underline; }
+.tn-notif__all:hover { text-decoration: underline; }
 
-/* ---------- Live pop-ups (new notification toasts, appended to the page) ---------- */
-.tu-live {
-	position: fixed !important;
-	top: 76px !important;
-	right: 20px !important;
-	left: auto !important;
-	width: 330px !important;
-	max-width: calc(100vw - 40px);
+/* ---------- 8. Pop-ups for new notifications ---------- */
+.tn-toasts {
+	position: fixed;
+	top: 76px;
+	right: 20px;
 	z-index: 100001;
-	font-family: 'Poppins', sans-serif;
-	font-size: 13px;
+	width: 340px;
+	max-width: calc(100vw - 40px);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	pointer-events: none;
 }
-.tu-live > * {
-	margin-bottom: 10px;
-	padding: 14px 18px;
-	background: #fff;
-	color: #455a64;
-	border-left: 4px solid #ee7865;
-	border-radius: 10px;
-	box-shadow: 0 10px 28px rgba(0, 0, 0, .3);
-	line-height: 1.55;
+.tn-toast {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 14px 40px 16px 14px;
+	background: var(--tn-bg);
+	color: var(--tn-text);
+	border-radius: 12px;
+	box-shadow: var(--tn-shadow);
+	overflow: hidden;
+	font: 13px/1.5 'Poppins', sans-serif;
+	pointer-events: auto;
+	animation: tn-toast-in .3s ease;
 }
-.tu-live a { color: #ee7865; font-weight: 600; text-decoration: none; }
-:root[data-theme="dark"] .tu-live > *,
-html.dark .tu-live > *,
-body.dark .tu-live > * { background: #1f2124; color: #cfd8dc; }
+.tn-toast.is-leaving { animation: tn-toast-out .3s ease forwards; }
+@keyframes tn-toast-in  { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+@keyframes tn-toast-out { to { opacity: 0; transform: translateX(24px); } }
 
-/* ---------- Smaller screens ---------- */
+.tn-toast__icon {
+	flex: 0 0 34px;
+	width: 34px; height: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: var(--tn-grad);
+	color: #fff;
+}
+.tn-toast__icon svg { width: 18px; height: 18px; fill: currentColor; }
+.tn-toast__text { flex: 1 1 auto; min-width: 0; }
+.tn-toast__text a { color: var(--tn-accent); font-weight: 600; text-decoration: none; }
+.tn-toast__text hr, .tn-toast__text .delete, .tn-toast__text .contentTime { display: none; }
+
+.tn-toast__close {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--tn-muted);
+	font-size: 0;
+	cursor: pointer;
+}
+.tn-toast__close::before { content: "\00d7"; font-size: 18px; line-height: 24px; }
+.tn-toast__close:hover { background: #e5565f; color: #fff; }
+
+.tn-toast__bar {                                /* shrinking time line */
+	position: absolute;
+	left: 0; bottom: 0;
+	height: 3px;
+	width: 100%;
+	background: var(--tn-grad);
+	transform-origin: left;
+	animation: tn-bar 7s linear forwards;
+}
+.tn-toast:hover .tn-toast__bar { animation-play-state: paused; }
+@keyframes tn-bar { to { transform: scaleX(0); } }
+
+/* ---------- 9. Smaller screens ---------- */
 @media (max-width: 1100px) {
-	.topnav:has(.topnav-user:not(:empty)) { padding-left: 120px; }
-	.topnav-user .tu-name { display: none; }
-	.topnav-user .tu-trigger { padding: 0 12px 0 4px; gap: 6px; }
+	.topnav:has(.tn-acts:not([hidden])) { padding-left: 120px; }
+	.tn-act__name { display: none; }
+	.tn-act--profile .tn-act__btn { padding: 0 12px 0 4px; gap: 6px; }
 }
 @media (max-width: 600px) {
-	.topnav-user { left: 8px; gap: 6px; }
-	.topnav:has(.topnav-user:not(:empty)) { padding-left: 112px; }
-	.topnav-user .tu-menulist { width: min(270px, calc(100vw - 20px)); }
-	.topnav-user .tu-notifs { width: min(350px, calc(100vw - 20px)); left: -62px !important; }
+	.tn-acts { left: 8px; gap: 6px; }
+	.topnav:has(.tn-acts:not([hidden])) { padding-left: 112px; }
+	.tn-act__panel--notif { left: -62px; }
 }
