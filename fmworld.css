@@ -1710,7 +1710,9 @@ a.legend-pill:hover {
 }
 .ucp-main table.table1 td:first-child { text-align: left; }
 .ucp-main table.table1 tr.row2 td, .ucp-main table.table1 td.row2 { background: #fafafa; }
-.ucp-main table.table1 tbody tr:hover td { background: rgba(238, 120, 101, .08); }
+/* row hover: replaces the forum's light-blue (#f5faff) hover with the theme colour */
+table.table1 tbody tr:hover, table.table1 tbody tr.hover { background-color: #fdf0ed !important; color: #455a64 !important; }
+.ucp-main table.table1 tbody tr:hover td, .ucp-main table.table1 tbody tr.hover td { background: #fdf0ed !important; }
 .ucp-main table.table1 a { color: #ee7865; font-weight: 500; text-decoration: none; }
 .ucp-main table.table1 a:hover { text-decoration: underline; }
 .ucp-main table.table1 input[type="checkbox"] { width: 18px; height: 18px; accent-color: #ee7865; cursor: pointer; }
@@ -1910,6 +1912,40 @@ a.legend-pill:hover {
 }
 .pf-adv .message-block[id^="group-"] ul.message-footer a:hover { color: #fff; transform: translateY(-1px); }
 .pf-adv .pagination.top { justify-content: flex-start; color: var(--pf-muted); }
+
+/* ---- usergroups: fixes after the first test on the live forum ---- */
+.pf-adv li > .avatar:has(i) {
+	display: block !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: none !important;
+	box-shadow: none !important;
+	overflow: visible !important;
+	line-height: 0;
+}
+.pf-adv li > .avatar i {
+	box-sizing: border-box;
+	flex: none;
+	width: 64px !important;
+	height: 64px !important;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+	border: 0;
+	font-style: normal;
+}
+.pf-adv .message-block[id^="group-"] .message-header { margin-left: 16px !important; }
+.pf-adv .message-block[id^="group-"] .message-header strong {
+	font: inherit !important;
+	color: inherit !important;
+}
+.pf-adv .message-block[id^="group-"] ul.message-footer a,
+.pf-adv .message-block[id^="group-"] ul.message-footer a:hover { text-decoration: none !important; color: #fff !important; }
+.pf-adv .message-block[id^="group-"] .message-text { font-family: 'Roboto', sans-serif; font-size: 14px; }
+.pf-adv ol:has(.message-block[id^="group-"]) { margin-top: 6px; }
+.pf-adv .pagination.top { padding: 0 4px; }
 
 
 .wl {
