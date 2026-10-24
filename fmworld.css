@@ -267,7 +267,7 @@ margin-top:6px;
 	display: block;
 	width: 200px;
 	max-width: 200px !important;
-	max-height: 320px !important;
+	max-height: 200px !important;
 	object-fit: cover;
   border: 5px solid #ffffff;
 }
