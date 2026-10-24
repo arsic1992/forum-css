@@ -1784,6 +1784,133 @@ a.legend-pill:hover {
 .pf .field_editable.invisible, .pf .invisible { display: none !important; }
 .pf-adv #profile-tab-field-profil dd img { max-width: 28px; height: auto; }
 
+/* =====================================================================
+   USERGROUPS TAB  -  groups become a grid of cards
+   (only touches lists that contain .message-block[id^="group-"])
+   ===================================================================== */
+.pf-adv ol:has(.message-block[id^="group-"]) {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+	gap: 18px;
+}
+.pf-adv ol > li:has(> .message-block[id^="group-"]) {
+	position: relative;
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr);
+	grid-template-rows: auto 1fr;
+	column-gap: 16px;
+	align-items: start;
+	margin: 0 !important;
+	padding: 20px !important;
+	border: 1px solid var(--pf-line) !important;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: var(--pf-shadow);
+	overflow: hidden;
+	transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.pf-adv ol > li:has(> .message-block[id^="group-"])::before {      /* gradient strip on top */
+	content: "";
+	position: absolute;
+	inset: 0 0 auto 0;
+	height: 4px;
+	background: var(--pf-grad);
+}
+.pf-adv ol > li:has(> .message-block[id^="group-"]):hover {
+	transform: translateY(-4px);
+	border-color: var(--pf-accent) !important;
+	box-shadow: 0 14px 30px rgba(0, 0, 0, .12);
+}
+
+/* the round icon: tinted with the group's own colour */
+.pf-adv li > .avatar:has(i) {
+	grid-row: 1 / span 2;
+	width: 64px !important;
+	height: 64px !important;
+	flex: none;
+	border-radius: 0;
+	background: none;
+	border: 0;
+}
+.pf-adv li > .avatar i {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	font-size: 34px;
+	background: color-mix(in srgb, currentColor 14%, #fff);
+	box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 30%, #fff);
+}
+
+/* name, description, status, button */
+.pf-adv .message-block[id^="group-"] {
+	display: contents;                         /* children sit directly in the card grid */
+}
+.pf-adv .message-block[id^="group-"] .message-header {
+	grid-column: 2;
+	padding: 0 !important;
+	background: none !important;
+	border: 0 !important;
+	font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--pf-dark);
+	align-self: center;
+	min-height: 64px;
+	display: flex;
+	align-items: center;
+}
+.pf-adv .message-block[id^="group-"] .message-text {
+	grid-column: 1 / -1;
+	margin-top: 14px;
+	padding: 0 !important;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	line-height: 1.55;
+}
+.pf-adv .message-block[id^="group-"] .message-text > div { flex: 1 1 100%; color: var(--pf-ink); }
+.pf-adv .message-block[id^="group-"] .message-text > div:empty { display: none; }
+.pf-adv .message-block[id^="group-"] .message-text > b {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .6px;
+	text-transform: uppercase;
+	color: var(--pf-muted);
+}
+.pf-adv .message-block[id^="group-"] .message-text > i {
+	padding: 3px 12px;
+	border-radius: 999px;
+	background: var(--pf-soft);
+	border: 1px solid var(--pf-line);
+	font-style: normal;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--pf-dark);
+}
+.pf-adv .message-block[id^="group-"] ul.message-footer {
+	grid-column: 1 / -1;
+	justify-content: flex-end;
+	margin: 16px 0 0;
+	padding: 14px 0 0;
+	border-top: 1px solid var(--pf-line);
+}
+.pf-adv .message-block[id^="group-"] ul.message-footer a {
+	padding: 7px 20px;
+	border: 0;
+	background: var(--pf-grad);
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 600;
+	text-decoration: none;
+	box-shadow: 0 5px 12px rgba(238, 120, 101, .3);
+}
+.pf-adv .message-block[id^="group-"] ul.message-footer a:hover { color: #fff; transform: translateY(-1px); }
+.pf-adv .pagination.top { justify-content: flex-start; color: var(--pf-muted); }
+
 
 .wl {
 	--wl-grad: linear-gradient(135deg, rgb(176 85 154 / .95), rgb(255 160 104 / .95));
